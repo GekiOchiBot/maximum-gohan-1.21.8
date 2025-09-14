@@ -1,0 +1,31 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "minecraft:gui/sprites/hud/food_full.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\uEFF0"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "minecraft:gui/sprites/hud/food_half.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\uEFF1"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "maximum-gohan:icon/saturation_icons.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\uEFF2\uEFF3\uEFF4\uEFF5"
+      ]
+    }
+  ]
+}

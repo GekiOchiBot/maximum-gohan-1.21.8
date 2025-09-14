@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.5,
+  "group": "saury",
+  "ingredient": "maximum-gohan:pacific_saury",
+  "result": {
+    "id": "maximum-gohan:cooked_saury"
+  }
+}
