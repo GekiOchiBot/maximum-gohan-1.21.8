@@ -1,7 +1,9 @@
 {
-  "itemgroup.maximum-gohan.mod_items": "ごはん",
+  "itemgroup.maximum-gohan.mod_items": "マキシマムごはんアイテム",
+  "itemgroup.maximum-gohan.mod_blocks": "マキシマムごはんブロック",
   "item.maximum-gohan.cheese": "チーズ",
   "item.maximum-gohan.smoked_cheese": "スモークチーズ",
   "item.maximum-gohan.pacific_saury": "秋刀魚",
-  "item.maximum-gohan.cooked_saury": "焼き秋刀魚"
+  "item.maximum-gohan.cooked_saury": "焼き秋刀魚",
+  "block.maximum-gohan.modifier_rack": "焚き火用燻製器"
 }

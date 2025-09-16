@@ -2,9 +2,6 @@ package net.ochibo.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.NoteBlockInstrument;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -14,7 +11,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.ochibo.MaximumGohan;
-import net.ochibo.block.custom.CampfireModSmokerBlock;
+import net.ochibo.block.custom.CampfireModifierRack;
 
 import java.util.function.Function;
 
@@ -23,7 +20,8 @@ public class ModBlocks {
 //    public static final Block RUSTY_COBBLESTONE = registerBlock("rusty_cobblestone", properties -> new Block(properties.mapColor(MapColor.STONE_GRAY).requiresTool().strength(2.0F, 6.0F)));
 //    public static final Block IRON_RUSTER_BLOCK = registerBlock("iron_ruster_block",properties -> new IronRusterBlock(properties.mapColor(MapColor.IRON_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresTool().strength(5.0F, 6.0F).sounds(BlockSoundGroup.IRON)));
 
-    public static final Block MOD_SMOKER = registerBlock("iron_ruster_block",properties -> new CampfireModSmokerBlock(properties.nonOpaque()));
+    public static final Block MODIFIER_RACK = registerBlock("modifier_rack",
+            properties -> new CampfireModifierRack(properties.nonOpaque().noCollision().sounds(BlockSoundGroup.WOOD)));
 
     private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> function) {
         Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(MaximumGohan.MOD_ID, name))));

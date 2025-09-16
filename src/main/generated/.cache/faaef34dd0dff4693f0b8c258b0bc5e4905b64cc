@@ -1,9 +1,12 @@
 // 1.21.8	-999999999-01-01T00:00:00	Maximum Gohan/Model Definitions
+20543905fbc97f85cc81b0f26a1f05c348155d77 assets/maximum-gohan/blockstates/mod_smoker.json
 f10c0b7114e1bd0d186c5eff823b497355719eef assets/maximum-gohan/items/cheese.json
 1e9ea9fd2bd7fac52c8347965a4f6a4a31094053 assets/maximum-gohan/items/cooked_saury.json
+3aa2cbb3999007013ab6dea01b62edb1da10cbe4 assets/maximum-gohan/items/mod_smoker.json
 e86eaa2740d0eae4c6b7345731d7cb85662af42a assets/maximum-gohan/items/pacific_saury.json
 9fb68d38d7182d5f6de067704a92698d298debab assets/maximum-gohan/items/ruby.json
 a7a7478454c7b95e0e2b4fb5d02341f0cfaff320 assets/maximum-gohan/items/smoked_cheese.json
+3666112e9f55f35bd8f8c01eb24f0506b340a130 assets/maximum-gohan/models/block/mod_smoker.json
 8bcf3f4820a649f9c4e58bf7dbd6fa4c35c4299b assets/maximum-gohan/models/item/cheese.json
 b7d37f9cdf944859b421d0ed175430a000209043 assets/maximum-gohan/models/item/cooked_saury.json
 eb2c799e68f6f91bae9f4ba05e4dd13824a4d7ad assets/maximum-gohan/models/item/pacific_saury.json

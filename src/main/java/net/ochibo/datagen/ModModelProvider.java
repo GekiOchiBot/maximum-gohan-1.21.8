@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.client.data.BlockStateModelGenerator;
 import net.minecraft.client.data.ItemModelGenerator;
 import net.minecraft.client.data.Models;
+import net.ochibo.block.ModBlocks;
 import net.ochibo.item.ModItems;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -14,7 +15,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-//        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.IRON_RUSTER_BLOCK);
+//        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.MODIFIER_RACK);
 //        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RUST_PORTAL_BLOCK);
 //        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RUSTED_IRON_BLOCK);
 //        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.RUSTY_COBBLESTONE);

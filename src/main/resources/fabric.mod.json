@@ -3,7 +3,7 @@
 	"id": "maximum-gohan",
 	"version": "${version}",
 	"name": "Maximum Gohan",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Adding huge amount of foods!",
 	"authors": [
 		"Me!"
 	],
@@ -20,6 +20,9 @@
 		],
 		"fabric-datagen": [
 			"net.ochibo.MaximumGohanDataGenerator"
+		],
+		"client": [
+			"net.ochibo.MaximumGohanClient"
 		]
 	},
 	"mixins": [

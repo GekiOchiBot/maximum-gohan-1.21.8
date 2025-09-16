@@ -27,10 +27,10 @@ public class ModItemGroups {
     public static final ItemGroup BLOCKS_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MaximumGohan.MOD_ID,"mod_blocks"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModBlocks.MOD_SMOKER))
+                    .icon(() -> new ItemStack(ModBlocks.MODIFIER_RACK))
                     .displayName(Text.translatable("itemgroup.maximum-gohan.mod_blocks"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModBlocks.MOD_SMOKER);
+                        entries.add(ModBlocks.MODIFIER_RACK);
                     })
                     .build());
 
