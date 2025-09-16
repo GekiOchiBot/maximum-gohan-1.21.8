@@ -31,6 +31,7 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.maximum-gohan.mod_blocks"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModBlocks.MODIFIER_RACK);
+                        entries.add(ModBlocks.MODIFIER_SMOKER_RACK);
                     })
                     .build());
 

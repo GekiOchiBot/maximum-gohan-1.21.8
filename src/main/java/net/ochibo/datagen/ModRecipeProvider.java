@@ -34,11 +34,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeGenerator(wrapperLookup,recipeExporter) {
             @Override
             public void generate() {
-
+                LOGGER.info("{}",ModRecipes.CAMPFIRE_SMOKING_TYPE.toString());
                 offerSmelting(List.of(ModItems.PACIFIC_SAURY), RecipeCategory.FOOD,ModItems.COOKED_SAURY,0.5f,200,"saury");
                 offerFoodCookingRecipe("smoker",RecipeSerializer.SMOKING,SmokingRecipe::new,100,ModItems.PACIFIC_SAURY,ModItems.COOKED_SAURY,0.5f);
                 offerFoodCookingRecipe("campfire",RecipeSerializer.CAMPFIRE_COOKING,CampfireCookingRecipe::new,600,ModItems.PACIFIC_SAURY,ModItems.COOKED_SAURY,0.5f);
-                offerFoodCookingRecipe("campfire_smoking", ModRecipes.CAMPFIRE_SMOKING_SERIALIZER, CampfireSmokingRecipe::new,600,ModItems.CHEESE,ModItems.SMOKED_CHEESE,0.5f);
                 offerFoodCookingRecipe("smoker",RecipeSerializer.SMOKING,SmokingRecipe::new,200,ModItems.CHEESE,ModItems.SMOKED_CHEESE,1f);
 //                CookingRecipeJsonBuilder.create(Ingredient.ofItem(ModItems.PACIFIC_SAURY), RecipeCategory.FOOD, ModItems.COOKED_SAURY, 0.5f, 100, RecipeSerializer.SMOKING, SmokingRecipe::new);
 //                offerBlasting(List.of(ModItems.PYRITE), RecipeCategory.MISC,ModItems.CHEESE,1,100,"test");

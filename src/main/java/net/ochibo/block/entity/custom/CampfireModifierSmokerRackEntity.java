@@ -1,7 +1,6 @@
 package net.ochibo.block.entity.custom;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
@@ -11,9 +10,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.recipe.CampfireCookingRecipe;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.registry.RegistryWrapper;
@@ -28,19 +25,20 @@ import net.minecraft.world.event.GameEvent;
 import net.ochibo.MaximumGohan;
 import net.ochibo.block.entity.ImplementedInventory;
 import net.ochibo.block.entity.ModBlockEntities;
+import net.ochibo.recipe.CampfireSmokingRecipe;
+import net.ochibo.recipe.ModRecipes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-public class CampfireModifierRackEntity extends BlockEntity implements ImplementedInventory {
+public class CampfireModifierSmokerRackEntity extends BlockEntity implements ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4,ItemStack.EMPTY);
     private int[] cookingTimes = new int[4];
     private int[] requiredCookingTimes = new int[4];
     private float rotation = 0;
 
-    public CampfireModifierRackEntity(BlockPos pos, BlockState state) {
+    public CampfireModifierSmokerRackEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.RACK_BE, pos, state);
     }
 
@@ -88,7 +86,7 @@ public class CampfireModifierRackEntity extends BlockEntity implements Implement
     }
 
 
-    public static void serverTick(ServerWorld world, BlockPos pos, BlockState state, CampfireModifierRackEntity blockEntity, ServerRecipeManager.MatchGetter<SingleStackRecipeInput, CampfireCookingRecipe> recipeMatchGetter){
+    public static void serverTick(ServerWorld world, BlockPos pos, BlockState state, CampfireModifierSmokerRackEntity blockEntity, ServerRecipeManager.MatchGetter<SingleStackRecipeInput, CampfireSmokingRecipe> recipeMatchGetter){
         boolean bl = false;
         if (world.getBlockState(pos.down()).get(CampfireBlock.LIT)) {
             for(int i = 0; i < blockEntity.inventory.size(); ++i) {
@@ -115,21 +113,21 @@ public class CampfireModifierRackEntity extends BlockEntity implements Implement
         }
     }
 
-    public static void clientTick(World world, BlockPos pos, BlockState state, CampfireModifierRackEntity rack) {
+    public static void clientTick(World world, BlockPos pos, BlockState state, CampfireModifierSmokerRackEntity rack) {
     }
 
     public boolean addItem(ServerWorld world, @Nullable LivingEntity entity, ItemStack stack) {
         for(int i = 0; i < this.inventory.size(); ++i) {
             ItemStack itemStack = this.inventory.get(i);
             if (itemStack.isEmpty()) {
-                Optional<RecipeEntry<CampfireCookingRecipe>> optional = world.getRecipeManager().getFirstMatch(RecipeType.CAMPFIRE_COOKING, new SingleStackRecipeInput(stack), world);
+                Optional<RecipeEntry<CampfireSmokingRecipe>> optional = world.getRecipeManager().getFirstMatch(ModRecipes.CAMPFIRE_SMOKING_TYPE, new SingleStackRecipeInput(stack), world);
                 if (optional.isEmpty()) {
                     return false;
                 }
 
 
                 MaximumGohan.LOGGER.info("{}", ((RecipeEntry<?>)optional.get()).value());
-                this.requiredCookingTimes[i] = ((CampfireCookingRecipe)((RecipeEntry<?>)optional.get()).value()).getCookingTime();
+                this.requiredCookingTimes[i] = ((CampfireSmokingRecipe)((RecipeEntry<?>)optional.get()).value()).getCookingTime();
                 this.cookingTimes[i] = 0;
                 this.inventory.set(i, stack.splitUnlessCreative(1, entity));
                 world.emitGameEvent(GameEvent.BLOCK_CHANGE, this.getPos(), GameEvent.Emitter.of(entity, this.getCachedState()));

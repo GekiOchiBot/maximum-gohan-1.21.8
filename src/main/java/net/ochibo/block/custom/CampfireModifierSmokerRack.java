@@ -10,9 +10,9 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.SimpleParticleType;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.recipe.input.SingleStackRecipeInput;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
@@ -32,19 +32,21 @@ import net.minecraft.world.tick.ScheduledTickView;
 import net.ochibo.MaximumGohan;
 import net.ochibo.block.entity.ModBlockEntities;
 import net.ochibo.block.entity.custom.CampfireModifierRackEntity;
+import net.ochibo.block.entity.custom.CampfireModifierSmokerRackEntity;
+import net.ochibo.recipe.CampfireSmokingRecipe;
 import net.ochibo.recipe.ModRecipes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class CampfireModifierRack extends BlockWithEntity implements BlockEntityProvider {
+public class CampfireModifierSmokerRack extends BlockWithEntity implements BlockEntityProvider {
     private static final VoxelShape SHAPE =
-            CampfireModifierRack.createCuboidShape(1,2,1,15,4,15);
+            CampfireModifierSmokerRack.createCuboidShape(1,2,1,15,4,15);
     public static final EnumProperty<Direction> FACING;
 
-    public static final MapCodec<CampfireModifierRack> CODEC = CampfireModifierRack.createCodec(CampfireModifierRack::new);
+    public static final MapCodec<CampfireModifierSmokerRack> CODEC = CampfireModifierSmokerRack.createCodec(CampfireModifierSmokerRack::new);
 
-    public CampfireModifierRack(Settings settings) {
+    public CampfireModifierSmokerRack(Settings settings) {
         super(settings);
     }
 
@@ -89,7 +91,7 @@ public class CampfireModifierRack extends BlockWithEntity implements BlockEntity
     }
 
     private boolean hasRecipe(World world, ItemStack stack){
-        Optional<RecipeEntry<CampfireCookingRecipe>> recipe = ((ServerWorld) world).getRecipeManager().getFirstMatch(RecipeType.CAMPFIRE_COOKING,new SingleStackRecipeInput(stack), world);
+        Optional<RecipeEntry<CampfireSmokingRecipe>> recipe = ((ServerWorld) world).getRecipeManager().getFirstMatch(ModRecipes.CAMPFIRE_SMOKING_TYPE,new SingleStackRecipeInput(stack), world);
         MaximumGohan.LOGGER.info("{}",recipe.isPresent());
         return true;
     }
@@ -116,13 +118,23 @@ public class CampfireModifierRack extends BlockWithEntity implements BlockEntity
         builder.add(FACING);
     }
 
+    public static void spawnSmokeParticle(World world, BlockPos pos, boolean isSignal, boolean lotsOfSmoke) {
+        Random random = world.getRandom();
+        SimpleParticleType simpleParticleType = isSignal ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+        world.addImportantParticleClient(simpleParticleType, true, (double)pos.getX() + (double)0.5F + random.nextDouble() / (double)3.0F * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + random.nextDouble() + random.nextDouble(), (double)pos.getZ() + (double)0.5F + random.nextDouble() / (double)3.0F * (double)(random.nextBoolean() ? 1 : -1), (double)0.0F, 0.07, (double)0.0F);
+        if (lotsOfSmoke) {
+            world.addParticleClient(ParticleTypes.SMOKE, (double)pos.getX() + (double)0.5F + random.nextDouble() / (double)4.0F * (double)(random.nextBoolean() ? 1 : -1), (double)pos.getY() + 0.4, (double)pos.getZ() + (double)0.5F + random.nextDouble() / (double)4.0F * (double)(random.nextBoolean() ? 1 : -1), (double)0.0F, 0.005, (double)0.0F);
+        }
+
+    }
+
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         if (world instanceof ServerWorld serverWorld) {
-                ServerRecipeManager.MatchGetter<SingleStackRecipeInput, CampfireCookingRecipe> matchGetter = ServerRecipeManager.createCachedMatchGetter(RecipeType.CAMPFIRE_COOKING);
-                return validateTicker(type, ModBlockEntities.RACK_BE, (world1, pos, state1, blockEntity) -> CampfireModifierRackEntity.serverTick(serverWorld, pos, state1, blockEntity, matchGetter));
+                ServerRecipeManager.MatchGetter<SingleStackRecipeInput, CampfireSmokingRecipe> matchGetter = ServerRecipeManager.createCachedMatchGetter(ModRecipes.CAMPFIRE_SMOKING_TYPE);
+                return validateTicker(type, ModBlockEntities.SMOKER_RACK_BE, (world1, pos, state1, blockEntity) -> CampfireModifierSmokerRackEntity.serverTick(serverWorld, pos, state1, blockEntity, matchGetter));
         } else {
-            return validateTicker(type, ModBlockEntities.RACK_BE, CampfireModifierRackEntity::clientTick);
+            return validateTicker(type, ModBlockEntities.SMOKER_RACK_BE, CampfireModifierSmokerRackEntity::clientTick);
         }
     }
     static{

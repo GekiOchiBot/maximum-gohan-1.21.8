@@ -1,0 +1,10 @@
+{
+  "type": "maximum-gohan:campfire_smoking",
+  "category": "food",
+  "cookingtime": 300,
+  "experience": 0.35,
+  "ingredient": "maximum-gohan:cheese",
+  "result": {
+    "id": "maximum-gohan:smoked_cheese"
+  }
+}

@@ -7,26 +7,32 @@ import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.CookingRecipeCategory;
 import net.minecraft.recipe.book.RecipeBookCategories;
 import net.minecraft.recipe.book.RecipeBookCategory;
+import net.minecraft.recipe.book.RecipeCategory;
 import net.ochibo.block.ModBlocks;
 
 public class CampfireSmokingRecipe extends AbstractCookingRecipe {
-    public CampfireSmokingRecipe(String string, CookingRecipeCategory cookingRecipeCategory, Ingredient ingredient, ItemStack itemStack, float f, int i) {
-        super(string, cookingRecipeCategory, ingredient, itemStack, f, i);
+
+    public CampfireSmokingRecipe(String group, CookingRecipeCategory category, Ingredient ingredient, ItemStack result, float experience, int cookingTime) {
+        super(group, category, ingredient, result, experience, cookingTime);
     }
 
-    protected Item getCookerItem() {
-        return ModBlocks.MODIFIER_RACK.asItem();
-    }
-
-    public RecipeSerializer<CampfireSmokingRecipe> getSerializer() {
+    @Override
+    public RecipeSerializer<? extends AbstractCookingRecipe> getSerializer() {
         return ModRecipes.CAMPFIRE_SMOKING_SERIALIZER;
     }
 
-    public RecipeType<CampfireSmokingRecipe> getType() {
+    @Override
+    public RecipeType<? extends AbstractCookingRecipe> getType() {
         return ModRecipes.CAMPFIRE_SMOKING_TYPE;
     }
 
+    @Override
     public RecipeBookCategory getRecipeBookCategory() {
         return RecipeBookCategories.CAMPFIRE;
+    }
+
+    @Override
+    protected Item getCookerItem() {
+        return ModBlocks.MODIFIER_RACK.asItem();
     }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "maximum-gohan:block/modifier_rack",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "maximum-gohan:block/modifier_rack",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "maximum-gohan:block/modifier_rack"
+    },
+    "facing=west": {
+      "model": "maximum-gohan:block/modifier_rack",
+      "y": 90
+    }
+  }
+}

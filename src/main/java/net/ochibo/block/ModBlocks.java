@@ -12,6 +12,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.ochibo.MaximumGohan;
 import net.ochibo.block.custom.CampfireModifierRack;
+import net.ochibo.block.custom.CampfireModifierSmokerRack;
 
 import java.util.function.Function;
 
@@ -22,6 +23,10 @@ public class ModBlocks {
 
     public static final Block MODIFIER_RACK = registerBlock("modifier_rack",
             properties -> new CampfireModifierRack(properties.nonOpaque().noCollision().sounds(BlockSoundGroup.WOOD)));
+
+    public static final Block MODIFIER_SMOKER_RACK = registerBlock("modifier_smoker_rack",
+            properties -> new CampfireModifierSmokerRack(properties.nonOpaque().noCollision().sounds(BlockSoundGroup.WOOD)));
+
 
     private static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> function) {
         Block toRegister = function.apply(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(MaximumGohan.MOD_ID, name))));
